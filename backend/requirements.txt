@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic>=2
+httpx
+python-multipart
+scikit-learn
+semgrep
+bandit
+reportlab
+jsonschema
+gitpython
+flask
+pytest
