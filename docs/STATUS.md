@@ -1,14 +1,14 @@
 # Status
 
-Current step: **2, L2 taint** (next)
+Current step: **4, Eval harness** (next)
 Hackathon clock start: _set at kickoff_
 
 | # | Step | State | Gate evidence | Commit | Notes / deviations |
 |---|---|---|---|---|---|
 | 0 | Setup | done | `pytest -q`: 3 passed; schema imports | step-0 | Python 3.13 in build env (PRD says 3.11; compatible) |
 | 1 | Targets | done | `pytest -q`: 8 passed; 12 positives (6 direct, 6 wrapper), 6 negatives (3 sanitized, 3 dead code) | step-1 | Sinks added beyond PRD list: os.popen, send_file, shutil.copy, os.remove, executescript (see D9) |
-| 2 | L2 taint | todo | | | |
-| 3 | L2 wrappers | todo | | | |
+| 2 | L2 taint | done | `pytest -q`: 34 passed. Direct 6/6 found; sanitized negatives 0/3 flagged | step-2+3 | Built with step 3: one engine (callgraph.py, taint.py, scanner.py). Sanitizers are per-CWE (shlex.quote does not clear path traversal). realpath+startswith guard not yet modelled |
+| 3 | L2 wrappers | done | Wrapper 6/6 found with route-to-sink path; dead-code 3/3 reported only as `taint-unreachable` / pattern-match; 0 unexpected reachable findings | step-2+3 | Path length capped at 8 hops. Methods on classes not resolved (top-level functions only) |
 | 4 | Eval harness | todo | | | |
 | 5 | L5 severity + API | todo | | | |
 | 6 | L1 ingestion | todo | | | |
@@ -27,4 +27,6 @@ Bandit flags command-injection sinks by pattern (`os.system`, `shell=True`) wher
 - Python and Flask only; decorator routes only; dynamic dispatch is not resolved.
 - Three bug classes: CWE-78, CWE-89, CWE-22.
 - Small evaluation sample; numbers are indicative.
+- Only top-level functions are followed; class methods, decorators other than routes and dynamic `getattr` calls are not resolved (they are listed as unresolved).
+- `realpath` + `startswith` prefix guards are not yet recognised as sanitizers.
 - Fix-watcher output is leads, not proof.
