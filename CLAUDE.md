@@ -14,6 +14,7 @@ Claude builds every layer in sequence. The human reviews at each gate and person
 - Keep functions small (aim for under 40 lines). No new dependencies beyond the stack list in `docs/decisions.md` without asking.
 - Never claim a number you have not produced by running code. Results tables must state the sample size.
 - Secrets live in `.env`, which is git-ignored. Never commit tokens.
+- Commits are authored by meghap-27 only. Never add Co-Authored-By, Claude-Session or any Claude/AI attribution to commit messages or PR descriptions.
 
 ## Commands
 - Backend: `cd backend && uvicorn app.main:app --reload`
