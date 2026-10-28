@@ -55,3 +55,11 @@ A pasted function is wrapped into `app.py` with a stub `from flask import Flask,
 ## D8. Repo and CI
 - Code lives in a new GitHub repo, with commits after each green step.
 - The PR-scan Action runs on a demo PR that introduces a vulnerable commit, to show early detection live.
+
+## D9. Extra sinks for path traversal and command injection
+**Gap:** the PRD sink list (`open`, path joins) misses common Flask file sinks.
+**Decision:** add `send_file`, `send_from_directory` (without a safe base), `shutil.copy*`, `shutil.move`, `os.remove`/`os.unlink` for CWE-22; `os.popen` for CWE-78; `executescript`/`executemany` for CWE-89.
+
+## D10. Headline claim
+**Gap:** the PRD says we find wrapper bugs that Bandit misses. Bandit pattern-matches command sinks everywhere, so it hits some wrapper sink lines (without knowing the source).
+**Decision:** the headline compares recall on wrapper bugs and precision, and shows the source-to-sink path as something Bandit cannot give. Numbers come only from `eval/run.py`.

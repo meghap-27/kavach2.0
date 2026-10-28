@@ -1,0 +1,214 @@
+[
+  {
+    "id": "CMD-D1",
+    "file": "cmd_app/app.py",
+    "line": 16,
+    "cwe": "CWE-78",
+    "kind": "direct",
+    "sink": "os.system",
+    "expected_path": [
+      "ping()",
+      "os.system"
+    ]
+  },
+  {
+    "id": "CMD-D2",
+    "file": "cmd_app/app.py",
+    "line": 23,
+    "cwe": "CWE-78",
+    "kind": "direct",
+    "sink": "subprocess.check_output",
+    "expected_path": [
+      "lookup()",
+      "subprocess.check_output"
+    ]
+  },
+  {
+    "id": "CMD-W1",
+    "file": "cmd_app/utils.py",
+    "line": 7,
+    "cwe": "CWE-78",
+    "kind": "wrapper",
+    "sink": "subprocess.run",
+    "expected_path": [
+      "report()",
+      "build_report()",
+      "_render()",
+      "_run_task()",
+      "subprocess.run"
+    ]
+  },
+  {
+    "id": "CMD-W2",
+    "file": "cmd_app/utils.py",
+    "line": 20,
+    "cwe": "CWE-78",
+    "kind": "wrapper",
+    "sink": "os.popen",
+    "expected_path": [
+      "archive()",
+      "archive_logs()",
+      "_compress()",
+      "os.popen"
+    ]
+  },
+  {
+    "id": "CMD-N1",
+    "file": "cmd_app/app.py",
+    "line": 42,
+    "cwe": "CWE-78",
+    "kind": "negative-sanitized",
+    "sink": "os.system",
+    "expected_path": []
+  },
+  {
+    "id": "CMD-N2",
+    "file": "cmd_app/utils.py",
+    "line": 29,
+    "cwe": "CWE-78",
+    "kind": "negative-deadcode",
+    "sink": "os.system",
+    "expected_path": []
+  },
+  {
+    "id": "SQL-D1",
+    "file": "sqli_app/app.py",
+    "line": 19,
+    "cwe": "CWE-89",
+    "kind": "direct",
+    "sink": "cursor.execute",
+    "expected_path": [
+      "user()",
+      "cursor.execute"
+    ]
+  },
+  {
+    "id": "SQL-D2",
+    "file": "sqli_app/app.py",
+    "line": 26,
+    "cwe": "CWE-89",
+    "kind": "direct",
+    "sink": "cursor.execute",
+    "expected_path": [
+      "order()",
+      "cursor.execute"
+    ]
+  },
+  {
+    "id": "SQL-W1",
+    "file": "sqli_app/db.py",
+    "line": 11,
+    "cwe": "CWE-89",
+    "kind": "wrapper",
+    "sink": "cursor.execute",
+    "expected_path": [
+      "profile()",
+      "find_user_by()",
+      "_fetch()",
+      "cursor.execute"
+    ]
+  },
+  {
+    "id": "SQL-W2",
+    "file": "sqli_app/db.py",
+    "line": 26,
+    "cwe": "CWE-89",
+    "kind": "wrapper",
+    "sink": "cursor.executescript",
+    "expected_path": [
+      "search()",
+      "search_items()",
+      "_like_clause()",
+      "cursor.executescript"
+    ]
+  },
+  {
+    "id": "SQL-N1",
+    "file": "sqli_app/app.py",
+    "line": 46,
+    "cwe": "CWE-89",
+    "kind": "negative-sanitized",
+    "sink": "cursor.execute",
+    "expected_path": []
+  },
+  {
+    "id": "SQL-N2",
+    "file": "sqli_app/db.py",
+    "line": 31,
+    "cwe": "CWE-89",
+    "kind": "negative-deadcode",
+    "sink": "connection.execute",
+    "expected_path": []
+  },
+  {
+    "id": "PATH-D1",
+    "file": "path_app/app.py",
+    "line": 16,
+    "cwe": "CWE-22",
+    "kind": "direct",
+    "sink": "open",
+    "expected_path": [
+      "download()",
+      "open"
+    ]
+  },
+  {
+    "id": "PATH-D2",
+    "file": "path_app/app.py",
+    "line": 22,
+    "cwe": "CWE-22",
+    "kind": "direct",
+    "sink": "send_file",
+    "expected_path": [
+      "avatar()",
+      "send_file"
+    ]
+  },
+  {
+    "id": "PATH-W1",
+    "file": "path_app/storage.py",
+    "line": 13,
+    "cwe": "CWE-22",
+    "kind": "wrapper",
+    "sink": "open",
+    "expected_path": [
+      "note()",
+      "read_note()",
+      "_resolve()",
+      "_load()",
+      "open"
+    ]
+  },
+  {
+    "id": "PATH-W2",
+    "file": "path_app/storage.py",
+    "line": 23,
+    "cwe": "CWE-22",
+    "kind": "wrapper",
+    "sink": "shutil.copy",
+    "expected_path": [
+      "export()",
+      "export_attachment()",
+      "_resolve()",
+      "shutil.copy"
+    ]
+  },
+  {
+    "id": "PATH-N1",
+    "file": "path_app/app.py",
+    "line": 40,
+    "cwe": "CWE-22",
+    "kind": "negative-sanitized",
+    "sink": "open",
+    "expected_path": []
+  },
+  {
+    "id": "PATH-N2",
+    "file": "path_app/storage.py",
+    "line": 28,
+    "cwe": "CWE-22",
+    "kind": "negative-deadcode",
+    "sink": "os.remove",
+    "expected_path": []
+  }
+]
